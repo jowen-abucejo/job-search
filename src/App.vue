@@ -1,5 +1,14 @@
-<script setup></script>
+<script>
+import MainNav from "./components/MainNav.vue";
+
+export default {
+  name: "App",
+  components: {
+    MainNav,
+  },
+};
+</script>
 
 <template>
-  <h3>Hello Vue</h3>
+  <MainNav />
 </template>
