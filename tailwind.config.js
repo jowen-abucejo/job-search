@@ -8,6 +8,9 @@ module.exports = {
       fontFamily: {
         sans: ["Open Sans", ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        "brand-purple-1" : "#873691"
+      },
     },
   },
   plugins: [],
