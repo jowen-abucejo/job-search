@@ -2,7 +2,16 @@
 export default {
   name: "MainNav",
   data() {
-    return { showDropdownNav: null };
+    return {
+      showDropdownNav: null,
+      navItems: [
+        { label: "Teams", link: "" },
+        { label: "Locations", link: "" },
+        { label: "Benefits", link: "" },
+        { label: "Jobs", link: "" },
+        { label: "Students", link: "" },
+      ],
+    };
   },
   methods: {
     toggleDropdownNav() {
@@ -18,7 +27,7 @@ export default {
       <div
         class="mx-auto flex flex-wrap items-center justify-between lg:justify-start"
       >
-        <a href="/" class="mx-8 my-3 flex items-center">
+        <a href="/" class="mx-8 flex items-center">
           <span class="self-center whitespace-nowrap dark:text-white"
             >Careers at</span
           >&nbsp;
@@ -49,7 +58,7 @@ export default {
           </svg>
         </button>
         <div
-          class="w-full bg-transparent bg-black bg-opacity-50 text-center lg:h-auto lg:w-auto lg:bg-transparent"
+          class="w-full bg-black bg-opacity-50 text-center lg:h-14 lg:w-auto lg:bg-transparent"
           :class="[
             showDropdownNav === null
               ? 'h-0'
@@ -59,41 +68,17 @@ export default {
           ]"
         >
           <ul
-            class="flex flex-col py-3 lg:mt-0 lg:flex-row lg:space-x-8 lg:border-0 lg:py-3 lg:text-sm lg:font-medium"
+            class="flex h-full flex-col lg:mt-0 lg:flex-row lg:items-stretch lg:space-x-8 lg:border-0 lg:pl-3 lg:text-sm lg:font-medium"
           >
-            <li>
+            <li
+              v-for="navItem in navItems"
+              :key="navItem.label"
+              class="flex items-center border-b-white hover:border-b lg:px-2"
+            >
               <a
-                href="#"
-                class="block border-b-white py-2 pl-3 pr-4 text-white hover:border-b dark:text-white"
-                >Home</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block border-b-white py-2 pl-3 pr-4 text-white hover:border-b dark:text-white"
-                >Leads & Managers</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block border-b-white py-2 pl-3 pr-4 text-white hover:border-b dark:text-white"
-                >Consultants & Analysts</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block border-b-white py-2 pl-3 pr-4 text-white hover:border-b dark:text-white"
-                >Developers</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block border-b-white py-2 pl-3 pr-4 text-white hover:border-b dark:text-white"
-                >Support & QA's</a
+                :href="navItem.link"
+                class="block text-white dark:text-white"
+                >{{ navItem.label }}</a
               >
             </li>
           </ul>
