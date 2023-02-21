@@ -22,22 +22,12 @@ export default {
       type: String,
       required: true,
     },
-    class: {
-      type: String,
-      required: false,
-      default: "",
-    },
-  },
-  computed: {
-    buttonClass() {
-      return `${this.class} ${this.color}`;
-    },
   },
 };
 </script>
 
 <template>
-  <button :type="type" :class="buttonClass">
+  <button :type="type" :class="color">
     {{ text }}
   </button>
 </template>
