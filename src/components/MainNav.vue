@@ -49,7 +49,7 @@ export default {
   <header :class="['border-y', 'border-white', headerClass]">
     <nav class="fixed h-16 w-full border-gray-200">
       <div
-        class="flex flex-wrap items-center justify-start bg-brand-purple-1 lg:justify-start"
+        class="flex flex-wrap items-center justify-start bg-gradient-to-br from-brand-purple-1 to-purple-800 lg:justify-start"
       >
         <button
           @click="toggleDropdownNav"
