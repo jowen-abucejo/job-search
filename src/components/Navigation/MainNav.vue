@@ -1,5 +1,5 @@
 <script>
-import ActionButton from "./ActionButton.vue";
+import ActionButton from "../Shared/ActionButton.vue";
 import ProfileImage from "./ProfileImage.vue";
 import SubNav from "./SubNav.vue";
 

@@ -11,16 +11,16 @@ export default {
 <template>
   <main class="py-8 px-8 lg:px-12">
     <div
-      class="flex flex-col-reverse items-center justify-evenly md:flex-row md:gap-10"
+      class="flex flex-col-reverse items-center justify-center md:flex-row md:gap-10"
     >
-      <section class="px-8 md:w-1/2">
+      <section class="px-8">
         <HeadLine />
         <p class="mt-10 mb-5 text-xl font-medium md:text-2xl lg:text-3xl">
           Find your next job at Yondu
         </p>
         <JobSearchForm />
       </section>
-      <section class="p-8 md:w-1/2">
+      <section class="p-8">
         <div
           class="h-72 w-72 rounded-full bg-gradient-to-br from-brand-purple-1 to-purple-800 p-8 md:h-80 md:w-80 lg:h-96 lg:w-96"
         >
