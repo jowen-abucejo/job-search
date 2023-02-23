@@ -15,7 +15,7 @@ export default {
     >
       <section class="px-8">
         <HeadLine />
-        <p class="mt-10 mb-5 text-xl font-medium md:text-2xl lg:text-3xl">
+        <p class="mt-10 mb-12 text-xl font-medium md:text-2xl lg:text-3xl">
           Find your next job at Yondu
         </p>
         <JobSearchForm />
