@@ -4,7 +4,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
   { path: "/", name: "Home", component: HomePage },
-  { path: "/job-results", name: "JobResults", component: JobResultsPage },
+  { path: "/jobs/results", name: "JobResults", component: JobResultsPage },
 ];
 
 const router = createRouter({ history: createWebHashHistory(), routes });

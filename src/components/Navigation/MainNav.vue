@@ -9,11 +9,11 @@ export default {
     return {
       showDropdownNav: false,
       navItems: [
-        { label: "Teams", link: "" },
-        { label: "Locations", link: "" },
-        { label: "Benefits", link: "" },
-        { label: "Jobs", link: "" },
-        { label: "Students", link: "" },
+        { label: "Teams", link: "/" },
+        { label: "Locations", link: "/" },
+        { label: "Benefits", link: "/" },
+        { label: "Jobs", link: "/jobs/results" },
+        { label: "Students", link: "/" },
       ],
       isLoggedIn: false,
     };
@@ -70,7 +70,7 @@ export default {
             ></path>
           </svg>
         </button>
-        <a href="/" class="flex items-center lg:mx-8">
+        <router-link to="/" class="flex items-center lg:mx-8">
           <span class="self-center whitespace-nowrap dark:text-white"
             >Careers at</span
           >&nbsp;
@@ -80,7 +80,7 @@ export default {
             class="mx-1 mt-1 h-6 sm:h-9"
             alt="company logo"
           />
-        </a>
+        </router-link>
         <div class="fixed right-0 top-0 mx-8 block pt-4">
           <ActionButton
             v-if="!isLoggedIn"
@@ -99,11 +99,12 @@ export default {
             class="flex h-full flex-col py-3 lg:mt-0 lg:flex-row lg:items-stretch lg:space-x-8 lg:border-0 lg:py-0 lg:pl-3 lg:text-sm lg:font-medium"
           >
             <li v-for="navItem in navItems" :key="navItem.label">
-              <a
-                :href="navItem.link"
+              <router-link
+                :to="navItem.link"
                 class="block h-full w-full border-b-white py-3 text-white hover:border-b dark:text-white lg:py-6"
-                >{{ navItem.label }}</a
               >
+                {{ navItem.label }}
+              </router-link>
             </li>
           </ul>
         </div>
