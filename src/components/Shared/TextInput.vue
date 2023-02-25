@@ -17,9 +17,5 @@ export default {
 </script>
 
 <template>
-  <input
-    placeholder="Software Engineer"
-    class="w-full focus:outline-none"
-    @input="handleInput"
-  />
+  <input class="w-full focus:outline-none" @input="handleInput" />
 </template>
