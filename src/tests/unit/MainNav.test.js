@@ -1,10 +1,27 @@
-import MainNav from "../../components/Navigation/MainNav.vue";
+import MainNav from "@/components/Navigation/MainNav.vue";
 import { render, screen } from "@testing-library/vue";
 import userEvent from "@testing-library/user-event";
+import { RouterLinkStub } from "@vue/test-utils";
+
+const renderMainNav = () => {
+  return render(MainNav, {
+    global: {
+      mocks: {
+        $route: {
+          name: "Home",
+        },
+      },
+      stubs: {
+        FontAwesomeIcon: true,
+        RouterLink: RouterLinkStub,
+      },
+    },
+  });
+};
 
 describe("MainNav", () => {
   it("displays menu items for navigation", () => {
-    render(MainNav);
+    renderMainNav();
     const navItems = screen.getAllByRole("listitem");
     const navTexts = navItems.map((item) => item.textContent);
 
@@ -20,9 +37,7 @@ describe("MainNav", () => {
 
 describe("when user logs in", () => {
   it("display user profile picture", async () => {
-    render(MainNav);
-    screen.debug();
-
+    renderMainNav();
     let profileImage = screen.queryByRole("img", {
       name: /profile image/i,
     });
