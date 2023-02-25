@@ -34,10 +34,14 @@ export default {
       };
     },
 
+    onJobResultsPage() {
+      return this.$route.name === "JobResults";
+    },
+
     headerClass() {
       return {
-        "h-16": !this.isLoggedIn,
-        "h-32": this.isLoggedIn,
+        "h-16": !this.onJobResultsPage,
+        "h-32": this.onJobResultsPage,
       };
     },
   },
