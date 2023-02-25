@@ -101,6 +101,7 @@ export default {
             <li v-for="navItem in navItems" :key="navItem.label">
               <router-link
                 :to="navItem.link"
+                role="link"
                 class="block h-full w-full border-b-white py-3 text-white hover:border-b dark:text-white lg:py-6"
               >
                 {{ navItem.label }}
@@ -109,7 +110,7 @@ export default {
           </ul>
         </div>
       </div>
-      <SubNav v-if="isLoggedIn" />
+      <SubNav />
     </nav>
   </header>
 </template>
