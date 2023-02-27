@@ -1,4 +1,4 @@
-import TextInput from "../../components/Shared/TextInput.vue";
+import TextInput from "@/components/Shared/TextInput.vue";
 import { render, screen } from "@testing-library/vue";
 import userEvent from "@testing-library/user-event";
 
