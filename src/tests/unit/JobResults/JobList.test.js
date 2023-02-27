@@ -6,24 +6,41 @@ import { RouterLinkStub } from "@vue/test-utils";
 
 vi.mock("axios");
 
+const renderJobList = ($route) =>
+  render(JobList, {
+    global: {
+      mocks: {
+        $route,
+      },
+      stubs: {
+        "router-link": RouterLinkStub,
+      },
+    },
+  });
+
 describe("JobList", () => {
   it("fetches jobs", () => {
     axios.get.mockResolvedValue({ data: [] });
-    render(JobList);
+    const $route = {
+      query: {
+        page: 1,
+        size: 10,
+      },
+    };
+    renderJobList($route);
     expect(axios.get).toHaveBeenCalledWith("http://localhost:3000/jobs");
   });
 
   it("renders details of every job", async () => {
     axios.get.mockResolvedValue({ data: Array(15).fill({}) });
-    render(JobList, {
-      global: {
-        stubs: {
-          "router-link": RouterLinkStub,
-        },
+    const $route = {
+      query: {
+        page: 1,
+        size: 10,
       },
-    });
-
+    };
+    renderJobList($route);
     const jobs = await screen.findAllByRole("listitem");
-    expect(jobs).toHaveLength(15);
+    expect(jobs).toHaveLength(10);
   });
 });
