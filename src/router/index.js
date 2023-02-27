@@ -9,6 +9,12 @@ const routes = [
   { path: "/jobs/results/:id", name: "JobDetails", component: JobDetailsPage },
 ];
 
-const router = createRouter({ history: createWebHashHistory(), routes });
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes,
+  scrollBehavior() {
+    return { top: 0, left: 0, behavior: "smooth" };
+  },
+});
 
 export default router;
