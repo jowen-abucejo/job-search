@@ -13,7 +13,7 @@ export default {
 </script>
 
 <template>
-  <li>
+  <li class="mb-7">
     <router-link
       :to="jobPageLink"
       class="mx-auto block rounded border border-solid border-purple-500 bg-white"

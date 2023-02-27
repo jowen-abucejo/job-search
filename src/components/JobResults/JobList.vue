@@ -1,22 +1,19 @@
 <script>
 import JobListing from "./JobListing.vue";
+import axios from "axios";
 
 export default {
   name: "JobList",
   data() {
     return {
-      jobs: [
-        {
-          id: "1",
-          title: "Vue Developer",
-          organization: "Yondu Inc.",
-          minimumQualifications: ["1", "2"],
-          locations: ["2", "3"],
-        },
-      ],
+      jobs: [],
     };
   },
   components: { JobListing },
+  async mounted() {
+    const response = await axios.get("http://localhost:3000/jobs");
+    this.jobs = response.data;
+  },
 };
 </script>
 
