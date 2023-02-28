@@ -59,6 +59,7 @@ export default {
               query: { page: previousPage, size: pageSize },
             }"
             class="mx-3 text-sm font-semibold text-purple-500"
+            role="link"
             >Previous</router-link
           >
           <router-link
@@ -67,6 +68,7 @@ export default {
               name: 'JobResults',
               query: { page: nextPage, size: pageSize },
             }"
+            role="link"
             class="mx-3 text-sm font-semibold text-purple-500"
             >Next</router-link
           >
