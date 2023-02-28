@@ -6,7 +6,7 @@ export default {
   },
   computed: {
     jobPageLink() {
-      return `jobs/results/${this.job.id}`;
+      return `results/${this.job.id}`;
     },
   },
 };

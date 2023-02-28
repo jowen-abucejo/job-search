@@ -3,6 +3,10 @@ import ActionButton from "../Shared/ActionButton.vue";
 import ProfileImage from "./ProfileImage.vue";
 import SubNav from "./SubNav.vue";
 
+import { mapActions, mapState } from "pinia";
+
+import { useUserStore } from "@/stores/user";
+
 export default {
   name: "MainNav",
   data() {
@@ -15,18 +19,16 @@ export default {
         { label: "Jobs", link: "/jobs/results" },
         { label: "Students", link: "/" },
       ],
-      isLoggedIn: false,
     };
   },
   methods: {
+    ...mapActions(useUserStore, ["login"]),
     toggleDropdownNav() {
       this.showDropdownNav = !this.showDropdownNav;
     },
-    logIn() {
-      this.isLoggedIn = true;
-    },
   },
   computed: {
+    ...mapState(useUserStore, ["isLoggedIn"]),
     navListClass() {
       return {
         "slide-up": !this.showDropdownNav,
@@ -91,7 +93,7 @@ export default {
             text="Sign in"
             color="secondary"
             class="rounded py-1 px-2 text-sm font-semibold"
-            @click="logIn"
+            @click="login"
           />
           <ProfileImage v-else class="h-8 w-8 rounded-3xl bg-white" />
         </div>
