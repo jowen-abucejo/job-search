@@ -13,7 +13,7 @@ export default {
     return {
       showDropdownNav: false,
       navItems: [
-        { label: "Teams", link: "/" },
+        { label: "Teams", link: "/teams" },
         { label: "Locations", link: "/" },
         { label: "Benefits", link: "/" },
         { label: "Jobs", link: "/jobs/results" },
