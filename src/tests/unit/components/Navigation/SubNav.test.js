@@ -1,9 +1,16 @@
 import SubNav from "@/components/Navigation/SubNav.vue";
 import { render, screen } from "@testing-library/vue";
 
+import { createTestingPinia } from "@pinia/testing";
+
+import { useJobsStore } from "@/stores/jobs";
+import { useUserStore } from "@/stores/jobs";
+
+const pinia = createTestingPinia();
 const renderSubNav = (mocks, data) => {
   return render(SubNav, {
     global: {
+      plugins: [pinia],
       mocks: mocks,
       stubs: {
         FontAwesomeIcon: true,
@@ -23,11 +30,15 @@ describe("SubNav", () => {
       const data = {
         onJobsResultsPage: true,
       };
+
+      const jobsCount = 16;
+      const jobStore = useJobsStore();
+      jobStore.FILTERED_JOBS = Array(jobsCount).fill({});
       renderSubNav({ $route }, data);
 
-      const jobsCount = screen.queryByText("1643");
+      const displayedJobsCount = screen.queryByText(jobsCount);
 
-      expect(jobsCount).toBeInTheDocument();
+      expect(displayedJobsCount).toBeInTheDocument();
     });
   });
 
@@ -39,11 +50,15 @@ describe("SubNav", () => {
       const data = {
         onJobsResultsPage: false,
       };
+
+      const jobsCount = 11;
+      const jobStore = useJobsStore();
+      jobStore.FILTERED_JOBS = Array(jobsCount).fill({});
       renderSubNav({ $route }, data);
 
-      const jobsCount = screen.queryByText("1643");
+      const displayedJobsCount = screen.queryByText(jobsCount);
 
-      expect(jobsCount).not.toBeInTheDocument();
+      expect(displayedJobsCount).not.toBeInTheDocument();
     });
   });
 });
