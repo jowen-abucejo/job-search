@@ -1,10 +1,41 @@
 <script>
 import ActionButton from "../Shared/ActionButton.vue";
-import CollapsibleAccordion from "../Shared/CollapsibleAccordion.vue";
+
+import { mapState, mapActions } from "pinia";
+
+import {
+  useJobsStore,
+  UNIQUE_ORGANIZATIONS,
+  UNIQUE_JOB_TYPES,
+} from "@/stores/jobs";
+import {
+  useUserStore,
+  ADD_SELECTED_ORGANIZATIONS,
+  ADD_SELECTED_JOB_TYPES,
+} from "@/stores/user";
+import JobFilterSidebarCheckboxGroup from "./JobFilterSidebarCheckboxGroup.vue";
 
 export default {
   name: "JobFilterSidebar",
-  components: { ActionButton, CollapsibleAccordion },
+  components: {
+    ActionButton,
+    JobFilterSidebarCheckboxGroup,
+  },
+  methods: {
+    ...mapActions(useUserStore, [
+      ADD_SELECTED_ORGANIZATIONS,
+      ADD_SELECTED_JOB_TYPES,
+    ]),
+    updateOrganizations(selectedOrganizations) {
+      this.ADD_SELECTED_ORGANIZATIONS(selectedOrganizations);
+    },
+    updateJobTypes(selectedJobTypes) {
+      this.ADD_SELECTED_JOB_TYPES(selectedJobTypes);
+    },
+  },
+  computed: {
+    ...mapState(useJobsStore, [UNIQUE_ORGANIZATIONS, UNIQUE_JOB_TYPES]),
+  },
 };
 </script>
 
@@ -23,30 +54,17 @@ export default {
           />
         </div>
       </div>
-      <CollapsibleAccordion title="Organization">
-        <div class="mt-5 text-sm">
-          <fieldset>
-            <ul class="flex flex-row flex-wrap">
-              <li class="h-8 w-1/2">
-                <input type="checkbox" id="VueTube" class="mr-3" />
-                <label for="VueTube">VueTube</label>
-              </li>
-              <li class="h-8 w-1/2">
-                <input type="checkbox" id="Between Vue and Me" class="mr-3" />
-                <label for="Between Vue and Me">Between Vue & Me</label>
-              </li>
-              <li class="h-8 w-1/2">
-                <input type="checkbox" id="Et Vue Brute" class="mr-3" />
-                <label for="Et Vue Brute">Et Vue Brute</label>
-              </li>
-              <li class="h-8 w-1/2">
-                <input type="checkbox" id="Vue and a Half Men" class="mr-3" />
-                <label for="Vue and a Half Men">Vue and a Half Men</label>
-              </li>
-            </ul>
-          </fieldset>
-        </div>
-      </CollapsibleAccordion>
+      <JobFilterSidebarCheckboxGroup
+        headerTitle="Organizations"
+        :options="UNIQUE_ORGANIZATIONS"
+        :action="updateOrganizations"
+      />
+
+      <JobFilterSidebarCheckboxGroup
+        headerTitle="Job Types"
+        :options="UNIQUE_JOB_TYPES"
+        :action="updateJobTypes"
+      />
     </section>
   </div>
 </template>
