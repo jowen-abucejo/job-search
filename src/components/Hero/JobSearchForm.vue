@@ -32,7 +32,7 @@ export default {
   >
     <font-awesome-icon :icon="['fas', 'search']" class="mx-3" />
     <div class="flex h-full flex-1 flex-nowrap text-base">
-      <div class="relative -z-10 flex flex-1 items-center pr-3">
+      <div class="relative z-0 flex flex-1 items-center pr-3">
         <label for="role" class="absolute -top-7">Role</label>
         <TextInput id="role" v-model="role" placeholder="Software Engineer" />
       </div>
@@ -41,7 +41,7 @@ export default {
       >
         <span>in</span>
       </div>
-      <div class="relative -z-10 flex flex-1 items-center pr-3">
+      <div class="relative z-0 flex flex-1 items-center pr-3">
         <label for="location" class="absolute -top-7">Where?</label>
         <TextInput id="location" v-model="location" placeholder="BGC Taguig" />
       </div>
