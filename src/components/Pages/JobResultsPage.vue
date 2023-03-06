@@ -1,11 +1,6 @@
-<script>
+<script setup>
 import JobFilterSidebar from "../JobResults/JobFilterSidebar.vue";
 import JobList from "../JobResults/JobList.vue";
-
-export default {
-  name: "JobResultsPage",
-  components: { JobFilterSidebar, JobList },
-};
 </script>
 
 <template>

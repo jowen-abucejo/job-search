@@ -1,10 +1,5 @@
-<script>
+<script setup>
 import HeaderContainer from "../Shared/HeaderContainer.vue";
-
-export default {
-  name: "TeamsPage",
-  components: { HeaderContainer },
-};
 </script>
 
 <template>

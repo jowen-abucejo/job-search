@@ -1,9 +1,3 @@
-<script>
-export default {
-  name: "HeaderContainer",
-};
-</script>
-
 <template>
   <div class="w-full border-b border-solid border-purple-500">
     <div class="mx-auto my-16 text-center">

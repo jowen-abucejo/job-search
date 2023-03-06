@@ -1,54 +1,42 @@
-<script>
+<script setup>
 import ActionButton from "../Shared/ActionButton.vue";
 import ProfileImage from "./ProfileImage.vue";
 import SubNav from "./SubNav.vue";
 
-import { mapActions, mapState } from "pinia";
-
 import { useUserStore } from "@/stores/user";
+import { ref, computed } from "vue";
+import { useRoute } from "vue-router";
 
-export default {
-  name: "MainNav",
-  data() {
-    return {
-      showDropdownNav: false,
-      navItems: [
-        { label: "Teams", link: "/teams" },
-        { label: "Locations", link: "/" },
-        { label: "Benefits", link: "/" },
-        { label: "Jobs", link: "/jobs/results" },
-        { label: "Students", link: "/" },
-      ],
-    };
-  },
-  methods: {
-    ...mapActions(useUserStore, ["login"]),
-    toggleDropdownNav() {
-      this.showDropdownNav = !this.showDropdownNav;
-    },
-  },
-  computed: {
-    ...mapState(useUserStore, ["isLoggedIn"]),
-    navListClass() {
-      return {
-        "slide-up": !this.showDropdownNav,
-        "slide-down": this.showDropdownNav,
-      };
-    },
+const showDropdownNav = ref(false);
+const navItems = ref([
+  { label: "Teams", link: "/teams" },
+  { label: "Locations", link: "/" },
+  { label: "Benefits", link: "/" },
+  { label: "Jobs", link: "/jobs/results" },
+  { label: "Students", link: "/" },
+]);
 
-    onJobResultsPage() {
-      return this.$route.name === "JobResults";
-    },
+const userStore = useUserStore();
+const login = userStore.login;
 
-    headerClass() {
-      return {
-        "h-16": !this.onJobResultsPage,
-        "h-32": this.onJobResultsPage,
-      };
-    },
-  },
-  components: { ActionButton, ProfileImage, SubNav },
-};
+const toggleDropdownNav = () =>
+  (showDropdownNav.value = !showDropdownNav.value);
+
+const isLoggedIn = computed(() => userStore.isLoggedIn);
+
+const navListClass = computed(() => {
+  return {
+    "slide-up": !showDropdownNav.value,
+    "slide-down": showDropdownNav.value,
+  };
+});
+
+const route = useRoute();
+const onJobResultsPage = computed(() => route.name === "JobResults");
+const headerClass = computed(() => ({
+  "h-16": !onJobResultsPage.value,
+  "h-32": onJobResultsPage.value,
+}));
 </script>
 
 <template>

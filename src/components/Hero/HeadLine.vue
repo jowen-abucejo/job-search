@@ -1,9 +1,3 @@
-<script>
-export default {
-  name: "HeadLine",
-};
-</script>
-
 <template>
   <div>
     <div class="relative -z-10 max-h-24 overflow-hidden lg:max-h-32">

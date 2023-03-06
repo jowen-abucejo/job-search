@@ -1,15 +1,11 @@
-<script>
-export default {
-  name: "JobListing",
-  props: {
-    job: Object,
-  },
-  computed: {
-    jobPageLink() {
-      return `results/${this.job.id}`;
-    },
-  },
-};
+<script setup>
+import { computed } from "vue";
+
+const props = defineProps({
+  job: Object,
+});
+
+const jobPageLink = computed(() => `results/${props.job.id}`);
 </script>
 
 <template>

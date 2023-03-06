@@ -1,19 +1,14 @@
-<script>
-export default {
-  name: "TextInput",
-  props: {
-    modelValue: {
-      type: String,
-      required: true,
-    },
+<script setup>
+defineProps({
+  modelValue: {
+    type: String,
+    required: true,
   },
+});
 
-  methods: {
-    handleInput($event) {
-      this.$emit("update:modelValue", $event.target.value);
-    },
-  },
-};
+const emits = defineEmits(["update:modelValue"]);
+
+const handleInput = ($event) => emits("update:modelValue", $event.target.value);
 </script>
 
 <template>

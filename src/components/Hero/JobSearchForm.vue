@@ -1,27 +1,22 @@
-<script>
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 import ActionButton from "../Shared/ActionButton.vue";
 import TextInput from "../Shared/TextInput.vue";
 
-export default {
-  name: "JobSearchForm",
-  data() {
-    return {
-      role: "",
-      location: "",
-    };
-  },
-  components: { ActionButton, TextInput },
-  methods: {
-    searchJobs() {
-      this.$router.push({
-        name: "JobResults",
-        query: {
-          role: this.role,
-          location: this.location,
-        },
-      });
+const role = ref("");
+const location = ref("");
+
+const router = useRouter();
+
+const searchJobs = () => {
+  router.push({
+    name: "JobResults",
+    query: {
+      role: role.value,
+      location: location.value,
     },
-  },
+  });
 };
 </script>
 

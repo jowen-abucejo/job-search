@@ -1,8 +1,4 @@
-<script>
-export default {
-  name: "JobDetailsPage",
-};
-</script>
+<script setup></script>
 
 <template>
   <div></div>

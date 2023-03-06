@@ -1,32 +1,29 @@
-<script>
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 import CollapsibleAccordion from "../Shared/CollapsibleAccordion.vue";
 
-export default {
-  name: "JobFilterSidebarCheckboxGroup",
-  data() {
-    return { selectedOptions: [] };
+const selectedOptions = ref([]);
+
+const props = defineProps({
+  headerTitle: {
+    type: String,
+    required: true,
   },
-  props: {
-    headerTitle: {
-      type: String,
-      required: true,
-    },
-    options: {
-      type: Set,
-      required: true,
-    },
-    action: {
-      type: Function,
-      required: true,
-    },
+  options: {
+    type: Set,
+    required: true,
   },
-  components: { CollapsibleAccordion },
-  methods: {
-    updateSelected() {
-      this.action(this.selectedOptions);
-      this.$router.push({ name: "JobResults" });
-    },
+  action: {
+    type: Function,
+    required: true,
   },
+});
+
+const router = useRouter();
+const updateSelected = () => {
+  props.action(selectedOptions.value);
+  router.push({ name: "JobResults" });
 };
 </script>
 

@@ -1,42 +1,20 @@
-<script>
+<script setup>
 import ActionButton from "../Shared/ActionButton.vue";
 
-import { mapState, mapActions } from "pinia";
-
-import {
-  useJobsStore,
-  UNIQUE_ORGANIZATIONS,
-  UNIQUE_JOB_TYPES,
-} from "@/stores/jobs";
-import {
-  useUserStore,
-  ADD_SELECTED_ORGANIZATIONS,
-  ADD_SELECTED_JOB_TYPES,
-} from "@/stores/user";
+import { useJobsStore } from "@/stores/jobs";
+import { useUserStore } from "@/stores/user";
 import JobFilterSidebarCheckboxGroup from "./JobFilterSidebarCheckboxGroup.vue";
+import { computed } from "vue";
 
-export default {
-  name: "JobFilterSidebar",
-  components: {
-    ActionButton,
-    JobFilterSidebarCheckboxGroup,
-  },
-  methods: {
-    ...mapActions(useUserStore, [
-      ADD_SELECTED_ORGANIZATIONS,
-      ADD_SELECTED_JOB_TYPES,
-    ]),
-    updateOrganizations(selectedOrganizations) {
-      this.ADD_SELECTED_ORGANIZATIONS(selectedOrganizations);
-    },
-    updateJobTypes(selectedJobTypes) {
-      this.ADD_SELECTED_JOB_TYPES(selectedJobTypes);
-    },
-  },
-  computed: {
-    ...mapState(useJobsStore, [UNIQUE_ORGANIZATIONS, UNIQUE_JOB_TYPES]),
-  },
-};
+const userStore = useUserStore();
+
+const updateOrganizations = (organizations) =>
+  userStore.ADD_SELECTED_ORGANIZATIONS(organizations);
+const updateJobTypes = (jobTypes) => userStore.ADD_SELECTED_JOB_TYPES(jobTypes);
+
+const jobStore = useJobsStore();
+const UNIQUE_ORGANIZATIONS = computed(() => jobStore.UNIQUE_ORGANIZATIONS);
+const UNIQUE_JOB_TYPES = computed(() => jobStore.UNIQUE_JOB_TYPES);
 </script>
 
 <template>
@@ -55,15 +33,15 @@ export default {
         </div>
       </div>
       <JobFilterSidebarCheckboxGroup
-        headerTitle="Organizations"
-        :options="UNIQUE_ORGANIZATIONS"
-        :action="updateOrganizations"
-      />
-
-      <JobFilterSidebarCheckboxGroup
         headerTitle="Job Types"
         :options="UNIQUE_JOB_TYPES"
         :action="updateJobTypes"
+      />
+
+      <JobFilterSidebarCheckboxGroup
+        headerTitle="Organizations"
+        :options="UNIQUE_ORGANIZATIONS"
+        :action="updateOrganizations"
       />
     </section>
   </div>
