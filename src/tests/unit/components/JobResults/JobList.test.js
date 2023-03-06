@@ -7,15 +7,16 @@ import { useJobsStore } from "@/stores/jobs";
 
 vi.mock("axios");
 
-const renderJobList = ($route) => {
+import { useRoute } from "vue-router";
+
+vi.mock("vue-router");
+
+const renderJobList = () => {
   const pinia = createTestingPinia();
 
   return render(JobList, {
     global: {
       plugins: [pinia],
-      mocks: {
-        $route,
-      },
       stubs: {
         "router-link": RouterLinkStub,
       },
@@ -25,25 +26,25 @@ const renderJobList = ($route) => {
 
 describe("JobList", () => {
   it("fetches jobs", () => {
-    const $route = {
+    useRoute.mockReturnValue({
       query: {
         page: 1,
         size: 10,
       },
-    };
-    renderJobList($route);
+    });
+    renderJobList();
     const jobStore = useJobsStore();
     expect(jobStore.FETCH_JOBS).toHaveBeenCalled();
   });
 
   it("displays maximum jobs based on query params size", async () => {
-    const $route = {
+    useRoute.mockReturnValue({
       query: {
         page: 1,
         size: 10,
       },
-    };
-    renderJobList($route);
+    });
+    renderJobList();
     const jobStore = useJobsStore();
     jobStore.jobs = Array(15).fill({});
     const jobs = await screen.findAllByRole("listitem");
@@ -52,13 +53,10 @@ describe("JobList", () => {
 
   describe("when params has no page number and page size", () => {
     it("displays page 1 and default 10 jobs", async () => {
-      const $route = {
-        query: {
-          page: undefined,
-          size: undefined,
-        },
-      };
-      renderJobList($route);
+      useRoute.mockReturnValue({
+        query: {},
+      });
+      renderJobList();
       const jobStore = useJobsStore();
       jobStore.jobs = Array(15).fill({});
 
@@ -70,15 +68,15 @@ describe("JobList", () => {
   });
 
   describe("when users is on first page", () => {
-    const $route = {
+    useRoute.mockReturnValue({
       query: {
         page: 1,
         size: 10,
       },
-    };
+    });
 
     it("shows link to next page", async () => {
-      renderJobList($route);
+      renderJobList();
       const jobStore = useJobsStore();
       jobStore.jobs = Array(15).fill({});
 
@@ -88,7 +86,7 @@ describe("JobList", () => {
     });
 
     it("doesn't shows link to previous page", async () => {
-      renderJobList($route);
+      renderJobList();
       const jobStore = useJobsStore();
       jobStore.jobs = Array(15).fill({});
 
@@ -101,14 +99,14 @@ describe("JobList", () => {
   });
 
   describe("when users is on last page", () => {
-    const $route = {
-      query: {
-        page: 2,
-        size: 10,
-      },
-    };
     it("doesn't shows link to next page", async () => {
-      renderJobList($route);
+      useRoute.mockReturnValue({
+        query: {
+          page: 2,
+          size: 10,
+        },
+      });
+      renderJobList();
       const jobStore = useJobsStore();
       jobStore.jobs = Array(15).fill({});
 
@@ -118,7 +116,13 @@ describe("JobList", () => {
     });
 
     it("shows link to previous page", async () => {
-      renderJobList($route);
+      useRoute.mockReturnValue({
+        query: {
+          page: 2,
+          size: 10,
+        },
+      });
+      renderJobList();
       const jobStore = useJobsStore();
       jobStore.jobs = Array(15).fill({});
 
@@ -131,14 +135,14 @@ describe("JobList", () => {
   });
 
   describe("when first page is also the last page", () => {
-    const $route = {
-      query: {
-        page: 1,
-        size: 15,
-      },
-    };
     it("doesn't shows link to next page", async () => {
-      renderJobList($route);
+      useRoute.mockReturnValue({
+        query: {
+          page: 1,
+          size: 15,
+        },
+      });
+      renderJobList();
       const jobStore = useJobsStore();
       jobStore.jobs = Array(15).fill({});
 
@@ -148,7 +152,13 @@ describe("JobList", () => {
     });
 
     it("doesn't shows link to previous page", async () => {
-      renderJobList($route);
+      useRoute.mockReturnValue({
+        query: {
+          page: 1,
+          size: 15,
+        },
+      });
+      renderJobList();
       const jobStore = useJobsStore();
       jobStore.jobs = Array(15).fill({});
 

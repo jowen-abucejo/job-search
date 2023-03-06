@@ -1,18 +1,17 @@
 import { render, screen } from "@testing-library/vue";
 import userEvent from "@testing-library/user-event";
+import { useRouter } from "vue-router";
+vi.mock("vue-router");
 
 import JobSearchForm from "@/components/Hero/JobSearchForm.vue";
 
 describe("JobSearchForm", () => {
   describe("when user submits form", () => {
     it("it redirect use to job results page with  parameters", async () => {
-      const $router = { push: vi.fn() };
-
+      const push = vi.fn();
+      useRouter.mockReturnValue({ push });
       render(JobSearchForm, {
         global: {
-          mocks: {
-            $router,
-          },
           stubs: {
             FontAwesomeIcon: true,
           },
@@ -37,7 +36,7 @@ describe("JobSearchForm", () => {
 
       await userEvent.click(submitButton);
 
-      expect($router.push).toHaveBeenCalledWith({
+      expect(push).toHaveBeenCalledWith({
         name: "JobResults",
         query: {
           role: "Vue Developer",
