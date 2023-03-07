@@ -1,3 +1,4 @@
+import type { Job } from "@/api/types";
 import { defineStore } from "pinia";
 import getJobs from "../api/getJobs";
 
@@ -9,8 +10,12 @@ export const UNIQUE_JOB_TYPES = "UNIQUE_JOB_TYPES";
 
 export const FILTERED_JOBS = "FILTERED_JOBS";
 
+export interface JobsState {
+  jobs: Job[];
+}
+
 export const useJobsStore = defineStore("jobs", {
-  state: () => ({
+  state: (): JobsState => ({
     jobs: [],
   }),
 
@@ -23,13 +28,13 @@ export const useJobsStore = defineStore("jobs", {
 
   getters: {
     [UNIQUE_ORGANIZATIONS](state) {
-      const uniqueOrganizations = new Set();
+      const uniqueOrganizations = new Set<string>();
       state.jobs.forEach((job) => uniqueOrganizations.add(job.organization));
       return uniqueOrganizations;
     },
 
     [UNIQUE_JOB_TYPES](state) {
-      const uniqueJobTypes = new Set();
+      const uniqueJobTypes = new Set<string>();
       state.jobs.forEach((job) => uniqueJobTypes.add(job.jobType));
       return uniqueJobTypes;
     },

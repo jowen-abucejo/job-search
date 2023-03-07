@@ -3,8 +3,12 @@ import { useJobsStore } from "@/stores/jobs";
 
 import axios from "axios";
 import { useUserStore } from "@/stores/user";
+import type { Mock } from "vitest";
+import type { Job } from "@/api/types";
 
 vi.mock("axios");
+
+const axiosGetMock = axios.get as Mock;
 
 describe("state", () => {
   beforeEach(() => {
@@ -24,7 +28,7 @@ describe("actions", () => {
 
   describe("FETCH_JOBS", () => {
     it("makes an API request and stores received jobs", async () => {
-      axios.get.mockResolvedValue({
+      axiosGetMock.mockResolvedValue({
         data: ["Job1"],
       });
       const store = useJobsStore();
@@ -35,6 +39,23 @@ describe("actions", () => {
 });
 
 describe("getters", () => {
+  const createJob = (job: Partial<Job> = {}) => ({
+    id: 1,
+    title: "Angular Developer",
+    organization: "Vue and Me",
+    degree: "Master's",
+    jobType: "Intern",
+    locations: ["Lisbon"],
+    minimumQualifications: [
+      "Mesh granular deliverables, engineer enterprise convergence",
+    ],
+    preferredQualifications: [
+      "Mesh wireless metrics, syndicate innovative markets",
+    ],
+    description: ["Away someone forget effect wait land."],
+    dateAdded: "2021-07-04",
+    ...job,
+  });
   beforeEach(() => {
     setActivePinia(createPinia());
   });
@@ -43,9 +64,9 @@ describe("getters", () => {
     it("find unique organizations from list of jobs", () => {
       const store = useJobsStore();
       store.jobs = [
-        { organization: "Google" },
-        { organization: "Amazon" },
-        { organization: "Google" },
+        createJob({ organization: "Google" }),
+        createJob({ organization: "Amazon" }),
+        createJob({ organization: "Google" }),
       ];
 
       const result = store.UNIQUE_ORGANIZATIONS;
@@ -57,9 +78,9 @@ describe("getters", () => {
     it("filter jobs based on user selected organizations", () => {
       const jobStore = useJobsStore();
       jobStore.jobs = [
-        { organization: "Google" },
-        { organization: "Amazon" },
-        { organization: "Microsoft" },
+        createJob({ organization: "Google" }),
+        createJob({ organization: "Amazon" }),
+        createJob({ organization: "Microsoft" }),
       ];
 
       const userStore = useUserStore();
@@ -67,8 +88,8 @@ describe("getters", () => {
 
       const result = jobStore.FILTERED_JOBS;
       expect(result).toEqual([
-        { organization: "Google" },
-        { organization: "Microsoft" },
+        createJob({ organization: "Google" }),
+        createJob({ organization: "Microsoft" }),
       ]);
     });
   });
