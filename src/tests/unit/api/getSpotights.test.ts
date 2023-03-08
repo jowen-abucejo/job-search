@@ -1,12 +1,15 @@
 import axios from "axios";
 
 import getSpotLights from "@/api/getSpotLights";
+import type { Mock } from "vitest";
 
 vi.mock("axios");
 
+const axiosGetMock = axios.get as Mock;
+
 describe("getSpotLights", () => {
   beforeEach(() => {
-    axios.get.mockResolvedValue({
+    axiosGetMock.mockResolvedValue({
       data: [{ title: "SpotLight 1" }],
     });
   });
