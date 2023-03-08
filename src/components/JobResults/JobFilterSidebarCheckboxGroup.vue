@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import CollapsibleAccordion from "../Shared/CollapsibleAccordion.vue";
@@ -11,7 +11,7 @@ const props = defineProps({
     required: true,
   },
   options: {
-    type: Set,
+    type: Set<string>,
     required: true,
   },
   action: {
@@ -32,7 +32,7 @@ const updateSelected = () => {
     <div class="mt-5 text-sm">
       <fieldset>
         <ul class="flex flex-row flex-wrap">
-          <li class="h-8 w-1/2" v-for="option in options" :key="options">
+          <li class="h-8 w-1/2" v-for="option in options" :key="option">
             <input
               type="checkbox"
               :id="option"

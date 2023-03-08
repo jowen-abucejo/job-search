@@ -10,3 +10,10 @@ export interface Job {
   description: string[];
   dateAdded: string;
 }
+
+export interface SpotLight {
+  id: number;
+  img: string;
+  title: string;
+  description: string;
+}

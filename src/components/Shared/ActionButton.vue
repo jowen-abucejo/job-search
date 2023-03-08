@@ -1,18 +1,10 @@
-<script setup>
+<script lang="ts" setup>
 defineProps({
-  type: {
-    type: String,
-    required: false,
-    default: "button",
-    validator(value) {
-      return ["button", "submit", "reset"].includes(value);
-    },
-  },
   color: {
     type: String,
     required: false,
     default: "primary",
-    validator(value) {
+    validator(value: string) {
       return ["primary", "secondary"].includes(value);
     },
   },
@@ -24,7 +16,7 @@ defineProps({
 </script>
 
 <template>
-  <button :type="type" :class="color">
+  <button :class="color">
     {{ text }}
   </button>
 </template>

@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import JobListing from "./JobListing.vue";
 import { mapActions, mapState } from "pinia";
 
@@ -7,8 +7,12 @@ import { computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
-const currentPage = computed(() => Number.parseInt(route.query.page || "1"));
-const pageSize = computed(() => Number.parseInt(route.query.size || "10"));
+const currentPage = computed(() =>
+  Number.parseInt((route.query.page as string) || "1")
+);
+const pageSize = computed(() =>
+  Number.parseInt((route.query.size as string) || "10")
+);
 const previousPage = computed(() => {
   const previousPage = currentPage.value - 1;
   return previousPage >= 1 ? previousPage : undefined;

@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import JobFilterSidebar from "../JobResults/JobFilterSidebar.vue";
 import JobList from "../JobResults/JobList.vue";
 </script>

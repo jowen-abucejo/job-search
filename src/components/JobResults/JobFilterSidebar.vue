@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import ActionButton from "../Shared/ActionButton.vue";
 
 import { useJobsStore } from "@/stores/jobs";
@@ -8,9 +8,10 @@ import { computed } from "vue";
 
 const userStore = useUserStore();
 
-const updateOrganizations = (organizations) =>
+const updateOrganizations = (organizations: string[]) =>
   userStore.ADD_SELECTED_ORGANIZATIONS(organizations);
-const updateJobTypes = (jobTypes) => userStore.ADD_SELECTED_JOB_TYPES(jobTypes);
+const updateJobTypes = (jobTypes: string[]) =>
+  userStore.ADD_SELECTED_JOB_TYPES(jobTypes);
 
 const jobStore = useJobsStore();
 const UNIQUE_ORGANIZATIONS = computed(() => jobStore.UNIQUE_ORGANIZATIONS);

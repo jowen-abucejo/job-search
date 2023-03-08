@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 defineProps({
   modelValue: {
     type: String,
@@ -8,7 +8,8 @@ defineProps({
 
 const emits = defineEmits(["update:modelValue"]);
 
-const handleInput = ($event) => emits("update:modelValue", $event.target.value);
+const handleInput = ($event: any) =>
+  emits("update:modelValue", $event.target.value);
 </script>
 
 <template>

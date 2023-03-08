@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import HeadLine from "./HeadLine.vue";
 import JobSearchForm from "./JobSearchForm.vue";
 import SpotLight from "./SpotLight.vue";

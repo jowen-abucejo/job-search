@@ -1,8 +1,12 @@
-<script setup>
-import { computed } from "vue";
+<script lang="ts" setup>
+import type { Job } from "@/api/types";
+import { computed, type PropType } from "vue";
 
 const props = defineProps({
-  job: Object,
+  job: {
+    type: Object as PropType<Job>,
+    required: true,
+  },
 });
 
 const jobPageLink = computed(() => `results/${props.job.id}`);
