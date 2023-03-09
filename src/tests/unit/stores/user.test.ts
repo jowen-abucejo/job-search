@@ -15,6 +15,11 @@ describe("state", () => {
     const store = useUserStore();
     expect(store.selectedOrganizations).toEqual([]);
   });
+
+  it("stores user selected degrees", () => {
+    const store = useUserStore();
+    expect(store.selectedDegrees).toEqual([]);
+  });
 });
 
 describe("actions", () => {
@@ -31,6 +36,22 @@ describe("actions", () => {
       const store = useUserStore();
       store.ADD_SELECTED_ORGANIZATIONS(["Org1", "Org2"]);
       expect(store.selectedOrganizations).toEqual(["Org1", "Org2"]);
+    });
+  });
+
+  describe("ADD_SELECTED_JOB_TYPES", () => {
+    it("update user selected job types", () => {
+      const store = useUserStore();
+      store.ADD_SELECTED_JOB_TYPES(["JobType1", "JobType2"]);
+      expect(store.selectedJobTypes).toEqual(["JobType1", "JobType2"]);
+    });
+  });
+
+  describe("ADD_SELECTED_DEGREES", () => {
+    it("update user selected degrees", () => {
+      const store = useUserStore();
+      store.ADD_SELECTED_DEGREES(["Degree1", "Degree2"]);
+      expect(store.selectedDegrees).toEqual(["Degree1", "Degree2"]);
     });
   });
 });
