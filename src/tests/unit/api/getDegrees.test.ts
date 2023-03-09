@@ -20,8 +20,8 @@ describe("getDegrees", () => {
   });
 
   it("extracts degrees from response", async () => {
-    const jobs = await getDegrees();
-    expect(jobs).toEqual([
+    const degrees = await getDegrees();
+    expect(degrees).toEqual([
       {
         id: 1,
         degree: "Master's",
