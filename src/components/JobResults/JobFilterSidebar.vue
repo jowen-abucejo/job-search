@@ -2,7 +2,7 @@
 import ActionButton from "../Shared/ActionButton.vue";
 
 import { useJobsStore } from "@/stores/jobs";
-import { useUserStore } from "@/stores/user";
+import { CLEAR_USER_JOB_FILTER_SELECTIONS, useUserStore } from "@/stores/user";
 import JobFilterSidebarCheckboxGroup from "./JobFilterSidebarCheckboxGroup.vue";
 import { computed } from "vue";
 import { useDegreesStore } from "@/stores/degrees";
@@ -22,6 +22,8 @@ const UNIQUE_JOB_TYPES = computed(() => jobStore.UNIQUE_JOB_TYPES);
 
 const degreesStore = useDegreesStore();
 const UNIQUE_DEGREES = computed(() => degreesStore.UNIQUE_DEGREES);
+
+const clearJobFilters = userStore.CLEAR_USER_JOB_FILTER_SELECTIONS;
 </script>
 
 <template>
@@ -36,6 +38,7 @@ const UNIQUE_DEGREES = computed(() => degreesStore.UNIQUE_DEGREES);
             text="Clear Filter"
             color="secondary"
             class="mx-2 rounded border-none p-2"
+            @click="clearJobFilters"
           />
         </div>
       </div>
