@@ -55,7 +55,6 @@ describe("JobFilterSidebarCheckboxGroup", () => {
         action: action,
       });
       renderCheckboxGroup(props);
-      screen.debug();
 
       const button = screen.getByRole("button", { name: /organizations/i });
       await userEvent.click(button);

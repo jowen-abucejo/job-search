@@ -5,6 +5,7 @@ import { mapActions, mapState } from "pinia";
 import { useJobsStore } from "@/stores/jobs";
 import { computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import { useDegreesStore } from "@/stores/degrees";
 
 const route = useRoute();
 const currentPage = computed(() =>
@@ -34,7 +35,13 @@ const displayedJobs = computed(() => {
 
 const FETCH_JOBS = jobStore.FETCH_JOBS;
 
-onMounted(() => FETCH_JOBS());
+const degreesStore = useDegreesStore();
+const FETCH_DEGREES = degreesStore.FETCH_DEGREES;
+
+onMounted(() => {
+  FETCH_JOBS();
+  FETCH_DEGREES();
+});
 </script>
 
 <template>

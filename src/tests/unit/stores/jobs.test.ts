@@ -92,5 +92,41 @@ describe("getters", () => {
         createJob({ organization: "Microsoft" }),
       ]);
     });
+
+    it("filter jobs based on user selected job types", () => {
+      const jobStore = useJobsStore();
+      jobStore.jobs = [
+        createJob({ jobType: "Intern" }),
+        createJob({ jobType: "Part-time" }),
+        createJob({ jobType: "Full-time" }),
+      ];
+
+      const userStore = useUserStore();
+      userStore.selectedJobTypes = ["Intern", "Full-time"];
+
+      const result = jobStore.FILTERED_JOBS;
+      expect(result).toEqual([
+        createJob({ jobType: "Intern" }),
+        createJob({ jobType: "Full-time" }),
+      ]);
+    });
+
+    it("filter jobs based on user selected degrees", () => {
+      const jobStore = useJobsStore();
+      jobStore.jobs = [
+        createJob({ degree: "Ph.D." }),
+        createJob({ degree: "Bachelor's" }),
+        createJob({ degree: "Master's" }),
+      ];
+
+      const userStore = useUserStore();
+      userStore.selectedDegrees = ["Ph.D.", "Master's"];
+
+      const result = jobStore.FILTERED_JOBS;
+      expect(result).toEqual([
+        createJob({ degree: "Ph.D." }),
+        createJob({ degree: "Master's" }),
+      ]);
+    });
   });
 });

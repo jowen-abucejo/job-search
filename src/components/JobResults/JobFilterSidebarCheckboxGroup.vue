@@ -11,7 +11,7 @@ const props = defineProps({
     required: true,
   },
   options: {
-    type: Set<string>,
+    type: [Set<string>, Array<string>],
     required: true,
   },
   action: {

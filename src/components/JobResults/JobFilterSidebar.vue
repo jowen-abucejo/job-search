@@ -5,6 +5,7 @@ import { useJobsStore } from "@/stores/jobs";
 import { useUserStore } from "@/stores/user";
 import JobFilterSidebarCheckboxGroup from "./JobFilterSidebarCheckboxGroup.vue";
 import { computed } from "vue";
+import { useDegreesStore } from "@/stores/degrees";
 
 const userStore = useUserStore();
 
@@ -12,10 +13,15 @@ const updateOrganizations = (organizations: string[]) =>
   userStore.ADD_SELECTED_ORGANIZATIONS(organizations);
 const updateJobTypes = (jobTypes: string[]) =>
   userStore.ADD_SELECTED_JOB_TYPES(jobTypes);
+const updateDegrees = (degrees: string[]) =>
+  userStore.ADD_SELECTED_DEGREES(degrees);
 
 const jobStore = useJobsStore();
 const UNIQUE_ORGANIZATIONS = computed(() => jobStore.UNIQUE_ORGANIZATIONS);
 const UNIQUE_JOB_TYPES = computed(() => jobStore.UNIQUE_JOB_TYPES);
+
+const degreesStore = useDegreesStore();
+const UNIQUE_DEGREES = computed(() => degreesStore.UNIQUE_DEGREES);
 </script>
 
 <template>
@@ -37,6 +43,12 @@ const UNIQUE_JOB_TYPES = computed(() => jobStore.UNIQUE_JOB_TYPES);
         headerTitle="Job Types"
         :options="UNIQUE_JOB_TYPES"
         :action="updateJobTypes"
+      />
+
+      <JobFilterSidebarCheckboxGroup
+        headerTitle="Degrees"
+        :options="UNIQUE_DEGREES"
+        :action="updateDegrees"
       />
 
       <JobFilterSidebarCheckboxGroup

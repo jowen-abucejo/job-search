@@ -42,14 +42,19 @@ export const useJobsStore = defineStore("jobs", {
     [FILTERED_JOBS](state) {
       const selectedOrg = useUserStore().selectedOrganizations;
       const selectedJobTypes = useUserStore().selectedJobTypes;
+      const selectedDegrees = useUserStore().selectedDegrees;
 
       return state.jobs.filter((job) => {
         if (selectedOrg.length > 0 && !selectedOrg.includes(job.organization))
           return false;
+
         if (
           selectedJobTypes.length > 0 &&
           !selectedJobTypes.includes(job.jobType)
         )
+          return false;
+
+        if (selectedDegrees.length > 0 && !selectedDegrees.includes(job.degree))
           return false;
 
         return true;
