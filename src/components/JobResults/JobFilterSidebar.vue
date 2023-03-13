@@ -6,6 +6,7 @@ import { CLEAR_USER_JOB_FILTER_SELECTIONS, useUserStore } from "@/stores/user";
 import JobFilterSidebarCheckboxGroup from "./JobFilterSidebarCheckboxGroup.vue";
 import { computed } from "vue";
 import { useDegreesStore } from "@/stores/degrees";
+import JobFilterSidebarSkills from "./JobFilterSidebarSkills.vue";
 
 const userStore = useUserStore();
 
@@ -42,6 +43,7 @@ const clearJobFilters = userStore.CLEAR_USER_JOB_FILTER_SELECTIONS;
           />
         </div>
       </div>
+      <JobFilterSidebarSkills />
       <JobFilterSidebarCheckboxGroup
         headerTitle="Job Types"
         :options="UNIQUE_JOB_TYPES"
