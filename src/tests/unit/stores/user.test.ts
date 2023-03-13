@@ -1,5 +1,5 @@
 import { createPinia, setActivePinia } from "pinia";
-import { useUserStore } from "../../../stores/user";
+import { useUserStore } from "@/stores/user";
 
 describe("state", () => {
   beforeEach(() => {
@@ -19,6 +19,11 @@ describe("state", () => {
   it("stores user selected degrees", () => {
     const store = useUserStore();
     expect(store.selectedDegrees).toEqual([]);
+  });
+
+  it("stores user's search term for skills and qualifications", () => {
+    const store = useUserStore();
+    expect(store.skillsSearchTerm).toBe("");
   });
 });
 
@@ -61,12 +66,23 @@ describe("actions", () => {
       store.selectedOrganizations = ["Org1"];
       store.selectedJobTypes = ["JobType1"];
       store.selectedDegrees = ["Degree1"];
+      store.skillsSearchTerm = "Vue Developer";
 
       store.CLEAR_USER_JOB_FILTER_SELECTIONS();
 
       expect(store.selectedOrganizations).toEqual([]);
       expect(store.selectedJobTypes).toEqual([]);
       expect(store.selectedDegrees).toEqual([]);
+      expect(store.skillsSearchTerm).toBe("");
+    });
+  });
+
+  describe("UPDATE_SKILLS_SEARCH_TERM", () => {
+    it("receives search term for skills the user has entered", () => {
+      const store = useUserStore();
+      store.skillsSearchTerm = "";
+      store.UPDATE_SKILLS_SEARCH_TERM("Vue");
+      expect(store.skillsSearchTerm).toBe("Vue");
     });
   });
 });
