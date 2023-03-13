@@ -5,6 +5,9 @@ import { useRouter } from "vue-router";
 vi.mock("vue-router");
 
 import JobFilterSidebarCheckboxGroup from "@/components/JobResults/JobFilterSidebarCheckboxGroup.vue";
+import type { Mock } from "vitest";
+
+const useRouterMock = useRouter as Mock;
 
 describe("JobFilterSidebarCheckboxGroup", () => {
   const createProps = (props = {}) => ({
@@ -47,7 +50,7 @@ describe("JobFilterSidebarCheckboxGroup", () => {
 
   describe("when user clicks checkbox", () => {
     it("communicates that user has selected checkbox for organizations", async () => {
-      useRouter.mockReturnValue({ push: vi.fn() });
+      useRouterMock.mockReturnValue({ push: vi.fn() });
       const action = vi.fn();
       const props = createProps({
         headerTitle: "Organizations",
@@ -67,7 +70,7 @@ describe("JobFilterSidebarCheckboxGroup", () => {
     it("navigate user to job results page for fresh list of jobs", async () => {
       const push = vi.fn();
       const action = vi.fn();
-      useRouter.mockReturnValue({ push });
+      useRouterMock.mockReturnValue({ push });
       const props = createProps({
         headerTitle: "Organizations",
         options: new Set(["Microsoft", "Google", "Amazon"]),

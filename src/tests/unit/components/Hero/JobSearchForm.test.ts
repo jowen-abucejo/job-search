@@ -4,12 +4,15 @@ import { useRouter } from "vue-router";
 vi.mock("vue-router");
 
 import JobSearchForm from "@/components/Hero/JobSearchForm.vue";
+import type { Mock } from "vitest";
+
+const useRouterMock = useRouter as Mock;
 
 describe("JobSearchForm", () => {
   describe("when user submits form", () => {
     it("it redirect use to job results page with  parameters", async () => {
       const push = vi.fn();
-      useRouter.mockReturnValue({ push });
+      useRouterMock.mockReturnValue({ push });
       render(JobSearchForm, {
         global: {
           stubs: {

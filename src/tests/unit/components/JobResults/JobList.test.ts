@@ -8,8 +8,11 @@ import { useJobsStore } from "@/stores/jobs";
 vi.mock("axios");
 
 import { useRoute } from "vue-router";
+import type { Mock } from "vitest";
 
 vi.mock("vue-router");
+
+const useRouteMock = useRoute as Mock;
 
 const renderJobList = () => {
   const pinia = createTestingPinia();
@@ -26,7 +29,7 @@ const renderJobList = () => {
 
 describe("JobList", () => {
   it("fetches jobs", () => {
-    useRoute.mockReturnValue({
+    useRouteMock.mockReturnValue({
       query: {
         page: 1,
         size: 10,
@@ -38,7 +41,7 @@ describe("JobList", () => {
   });
 
   it("displays maximum jobs based on query params size", async () => {
-    useRoute.mockReturnValue({
+    useRouteMock.mockReturnValue({
       query: {
         page: 1,
         size: 10,
@@ -53,7 +56,7 @@ describe("JobList", () => {
 
   describe("when params has no page number and page size", () => {
     it("displays page 1 and default 10 jobs", async () => {
-      useRoute.mockReturnValue({
+      useRouteMock.mockReturnValue({
         query: {},
       });
       renderJobList();
@@ -68,7 +71,7 @@ describe("JobList", () => {
   });
 
   describe("when users is on first page", () => {
-    useRoute.mockReturnValue({
+    useRouteMock.mockReturnValue({
       query: {
         page: 1,
         size: 10,
@@ -100,7 +103,7 @@ describe("JobList", () => {
 
   describe("when users is on last page", () => {
     it("doesn't shows link to next page", async () => {
-      useRoute.mockReturnValue({
+      useRouteMock.mockReturnValue({
         query: {
           page: 2,
           size: 10,
@@ -116,7 +119,7 @@ describe("JobList", () => {
     });
 
     it("shows link to previous page", async () => {
-      useRoute.mockReturnValue({
+      useRouteMock.mockReturnValue({
         query: {
           page: 2,
           size: 10,
@@ -136,7 +139,7 @@ describe("JobList", () => {
 
   describe("when first page is also the last page", () => {
     it("doesn't shows link to next page", async () => {
-      useRoute.mockReturnValue({
+      useRouteMock.mockReturnValue({
         query: {
           page: 1,
           size: 15,
@@ -152,7 +155,7 @@ describe("JobList", () => {
     });
 
     it("doesn't shows link to previous page", async () => {
-      useRoute.mockReturnValue({
+      useRouteMock.mockReturnValue({
         query: {
           page: 1,
           size: 15,
