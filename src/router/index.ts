@@ -1,7 +1,7 @@
-import HomePage from "@/components/pages/HomePage.vue";
-import JobResultsPage from "@/components/pages/JobResultsPage.vue";
-import JobDetailsPage from "@/components/pages/JobDetailsPage.vue";
-import TeamsPage from "@/components/pages/TeamsPage.vue";
+import HomePage from "@/components/Pages/HomePage.vue";
+import JobResultsPage from "@/components/Pages/JobResultsPage.vue";
+import JobDetailsPage from "@/components/Pages/JobDetailsPage.vue";
+import TeamsPage from "@/components/Pages/TeamsPage.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
